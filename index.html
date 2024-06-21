@@ -14,9 +14,9 @@
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
             const correctHash = "d7f75f8a60ed3ff9c2adf1c80830b8be847f46a4315d331ed672a850b6e0cf30";
-            
+
             if (hashHex === correctHash) {
-                window.location.href = "protected.html";
+                window.location.href = "protected.html"; // Ensure this file exists
             } else {
                 alert("Incorrect password. Please try again.");
             }
