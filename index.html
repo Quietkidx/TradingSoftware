@@ -7,13 +7,11 @@
     <script>
         function checkPassword() {
             var password = document.getElementById("password").value;
-            var correctPassword = "yd"; // Change this to your desired password
-
+            // Simple obfuscation of the password check
+            var correctPassword = atob("bm9hY2Nlc3M=");
             if (password === correctPassword) {
-                console.log("Password correct. Redirecting to protected.html...");
                 window.location.href = "protected.html"; // Ensure this file exists
             } else {
-                console.log("Incorrect password entered.");
                 alert("Incorrect password. Please try again.");
             }
         }
