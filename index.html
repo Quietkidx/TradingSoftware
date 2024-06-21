@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Protected Redirect</title>
     <script>
-        function checkPassword() {
-            var password = document.getElementById("password").value;
-            // Simple obfuscation of the password check
-            var correctPassword = atob("bm9hY2Nlc3M=");
-            if (password === correctPassword) {
-                window.location.href = "protected.html"; // Ensure this file exists
+        async function checkPassword() {
+            const password = document.getElementById("password").value;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            const correctHash = "d7f75f8a60ed3ff9c2adf1c80830b8be847f46a4315d331ed672a850b6e0cf30";
+            
+            if (hashHex === correctHash) {
+                window.location.href = "protected.html";
             } else {
                 alert("Incorrect password. Please try again.");
             }
